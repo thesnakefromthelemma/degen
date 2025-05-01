@@ -40,7 +40,7 @@ import Text.Read
     ( readMaybe )
 
 
--- SUPERFICIAL IMPORTS --
+-- INTERNAL IMPORTS --
 
 import HyperVector
     ( HyperVector
@@ -70,8 +70,8 @@ main = do
     case args of
         [dim, alg, itr] -> case (readMaybe @Int dim, readMaybe @Int itr) of
             (Just n, Just i)  -> case alg of
-                    "Sid"    -> do _ <- replicateM i (bench @VU.Vector @Double Sid.sinkUnsafe n); pure ()
-                    "Archer" -> do _ <- replicateM i (bench @VU.Vector @Double Archer.sinkUnsafe n); pure ()
+                    "Sid"    -> replicateM i (bench @VU.Vector @Double Sid.sinkUnsafe n) >> pure ()
+                    "Archer" -> replicateM i (bench @VU.Vector @Double Archer.sinkUnsafe n) >> pure ()
                     _        -> putStrLn "Second command line didn't match."
             _                 -> putStrLn "First and/or third command line argument couldn't be parsed into an Int."
         _               -> putStrLn "Incorrect number of command line arguments."

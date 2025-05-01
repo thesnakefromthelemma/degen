@@ -45,7 +45,7 @@ import Text.Read
     ( readMaybe )
 
 
--- SUPERFICIAL IMPORTS --
+-- INTERNAL IMPORTS --
 
 import HyperVector
     ( HyperVector
